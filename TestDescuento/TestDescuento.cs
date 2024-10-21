@@ -1,4 +1,5 @@
 using Ingenieria;
+using Moq;
 
 namespace TestDescuento
 {
@@ -6,11 +7,13 @@ namespace TestDescuento
     public class TestDescuento
     {
         private Descuento descuento;
+        private Mock<IViaje> mockViaje;
 
         [TestInitialize]
         public void Setup()
         {
             descuento = new Descuento { Porcentaje = 20 };
+            mockViaje = new Mock<IViaje>();
         }
 
         [TestMethod]
@@ -20,7 +23,19 @@ namespace TestDescuento
             var precioConDescuento = descuento.AplicarDescuento(precioOriginal);
             Assert.AreEqual(80m, precioConDescuento);
         }
+        [TestMethod]
+        public void AplicarDescuento_UsandoViajeComoReferencia()
+        {
 
+            mockViaje.Setup(v => v.Precio).Returns(200m); 
+            var precioOriginal = mockViaje.Object.Precio;
+
+         
+            var precioConDescuento = descuento.AplicarDescuento(precioOriginal);
+
+           
+            Assert.AreEqual(160m, precioConDescuento);
+        }
         [TestMethod]
         public void ActualizarPorcentaje_CambiarPorcentajeDescuento()
         {
@@ -67,7 +82,7 @@ namespace TestDescuento
         [TestMethod]
         public void AplicarDescuentoConLimite_ExcedeLimite()
         {
-            var limite = 25m; // Descuento es de 20
+            var limite = 25m; 
             var precioOriginal = 100m;
             var precioConDescuento = descuento.AplicarDescuentoConLimite(precioOriginal, limite);
             Assert.AreEqual(75m, precioConDescuento);

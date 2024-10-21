@@ -11,12 +11,12 @@ namespace Ingenieria
         decimal Precio { get; set; }
         bool EstaCancelado { get; set; }
         void RealizarViaje(Usuario usuario, Cuenta cuenta);
-        void CancelarViaje(Usuario usuario, Cuenta cuenta);
+        void CancelarViaje(Usuario usuario, Cuenta cuenta); 
     }
     public class Viaje : IViaje
     {
         public string Destino { get; set; }
-        public virtual decimal Precio { get; set; } // Hacer la propiedad virtual
+        public virtual decimal Precio { get; set; } 
         public bool EstaCancelado { get; set; } = false;
 
         public void RealizarViaje(Usuario usuario, Cuenta cuenta)
@@ -30,10 +30,9 @@ namespace Ingenieria
                 throw new InvalidOperationException("El viaje ya ha sido cancelado.");
             }
 
-            // Lógica para manejar la cancelación
             EstaCancelado = true;
-            // Por ejemplo, podrías reembolsar el precio al saldo de la cuenta del usuario
-            cuenta.Saldo += Precio; // Asumiendo que Cuenta tiene una propiedad Saldo
+      
+            cuenta.Saldo += Precio; 
         
         }
         public void ActualizarPrecio(decimal nuevoPrecio)

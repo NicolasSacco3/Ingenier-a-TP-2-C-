@@ -28,7 +28,7 @@ namespace Ingenieria
                 throw new ArgumentException("El porcentaje debe estar entre 0 y 100.");
             Porcentaje = nuevoPorcentaje;
         }
-        public static decimal DescuentoMaximo => 50; // Porcentaje máximo permitido
+        public static decimal DescuentoMaximo => 50; 
 
         public decimal AplicarDescuentoConLimite(decimal precio, decimal limite)
         {

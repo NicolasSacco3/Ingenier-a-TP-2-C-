@@ -10,7 +10,7 @@ namespace Ingenieria
     {
         public string Nombre { get; set; }
         public string Email { get; set; }
-        public Cuenta Cuenta { get; set; } // Agregamos la propiedad Cuenta
+        public Cuenta Cuenta { get; set; } 
 
         public bool ValidarEmail()
         {
@@ -18,15 +18,15 @@ namespace Ingenieria
         }
         public void CancelarViaje(Viaje viaje)
         {
-            // Verificar que el viaje no esté cancelado
+
             if (viaje.EstaCancelado)
             {
                 throw new InvalidOperationException("El viaje ya ha sido cancelado.");
             }
 
-            // Cancelar el viaje
+
             viaje.CancelarViaje(this, Cuenta);
-            // Aquí podrías agregar más lógica, como notificar al usuario sobre la cancelación
+
         }
     }
 }

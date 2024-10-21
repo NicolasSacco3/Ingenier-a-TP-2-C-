@@ -1,4 +1,5 @@
 using Ingenieria;
+using Moq;
 
 namespace Test_Viajes
 {
@@ -11,7 +12,7 @@ namespace Test_Viajes
         [TestInitialize]
         public void Setup()
         {
-            viaje = new Viaje { Destino = "Paris", Precio = 200m }; // Cargo datos por default para p
+            viaje = new Viaje { Destino = "Paris", Precio = 200m }; 
         
         }
 
@@ -45,9 +46,15 @@ namespace Test_Viajes
         [TestMethod]
         public void CompararPrecio_RetornaResultadoCorrecto()
         {
-            var otroViaje = new Viaje { Destino = "Londres", Precio = 150m };
-            var resultado = viaje.CompararPrecio(otroViaje);
-            Assert.IsTrue(resultado > 0); // este assert devuelve el Viaje es más caro
+         
+            var mockOtroViaje = new Mock<Viaje>();
+            mockOtroViaje.Setup(v => v.Precio).Returns(150m); 
+
+    
+            var resultado = viaje.CompararPrecio(mockOtroViaje.Object);
+
+    
+            Assert.IsTrue(resultado > 0); 
         }
     }
 }

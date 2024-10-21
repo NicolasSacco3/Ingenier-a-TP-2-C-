@@ -29,7 +29,7 @@ namespace Ingeniería
             if (viajes.Contains(viaje))
             {
                 viajes.Remove(viaje);
-                viaje.CancelarViaje(usuario, cuenta); // Asumiendo que Usuario tiene una propiedad Cuenta
+                viaje.CancelarViaje(usuario, cuenta); 
             }
             else
             {

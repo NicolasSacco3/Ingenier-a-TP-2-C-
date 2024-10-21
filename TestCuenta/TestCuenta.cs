@@ -1,4 +1,5 @@
 using Ingenieria;
+using Moq;
 
 namespace TestCuenta
 {
@@ -37,10 +38,16 @@ namespace TestCuenta
         [TestMethod]
         public void Transferir_TransfiereMontoACuentaDestino()
         {
-            var cuentaDestino = new Cuenta { Numero = "654321", Saldo = 50m };
-            cuenta.Transferir(cuentaDestino, 50);
+            
+            var mockCuentaDestino = new Mock<Cuenta>();
+            mockCuentaDestino.Setup(c => c.Saldo).Returns(50m); 
+
+           
+            cuenta.Transferir(mockCuentaDestino.Object, 50);
+
+          
             Assert.AreEqual(50m, cuenta.Saldo);
-            Assert.AreEqual(100m, cuentaDestino.Saldo);
+            mockCuentaDestino.Verify(c => c.Depositar(50), Times.Once);
         }
 
         [TestMethod]
@@ -69,5 +76,13 @@ namespace TestCuenta
             cuenta.ReiniciarSaldo();
             Assert.IsFalse(cuenta.EsEstadoActivo());
         }
+        public void Transferir_LanzaExcepcionSiFondosInsuficientes()
+        {
+          
+            var mockCuentaDestino = new Mock<Cuenta>();
+            mockCuentaDestino.Setup(c => c.Saldo).Returns(50m);
+            Assert.ThrowsException<InvalidOperationException>(() => cuenta.Transferir(mockCuentaDestino.Object, 150));
+        }
+
     }
 }
