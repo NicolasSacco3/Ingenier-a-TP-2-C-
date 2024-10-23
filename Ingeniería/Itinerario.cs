@@ -1,11 +1,10 @@
-﻿using Ingenieria;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ingeniería
+namespace Ingenieria
 {
     public class Itinerario
     {
@@ -29,7 +28,7 @@ namespace Ingeniería
             if (viajes.Contains(viaje))
             {
                 viajes.Remove(viaje);
-                viaje.CancelarViaje(usuario, cuenta); 
+                viaje.CancelarViaje(usuario, cuenta);
             }
             else
             {
