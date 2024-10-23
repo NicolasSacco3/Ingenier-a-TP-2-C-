@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Ingenieria
 {
-    public class Usuario
+    public class Usuario : IUsuario
     {
         public string Nombre { get; set; }
         public string Email { get; set; }
-        public Cuenta Cuenta { get; set; } 
+        public Cuenta Cuenta { get; set; }
 
         public bool ValidarEmail()
         {

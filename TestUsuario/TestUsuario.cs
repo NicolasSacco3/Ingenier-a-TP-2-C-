@@ -1,29 +1,20 @@
 using Ingenieria;
-
-
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace TestUsuario
 {
     [TestClass]
     public class TestUsuario
     {
-
-
-        Usuario usuario = new Usuario();
         [TestMethod]
-
         public void ValidarEmail_EmailValido_RetornaTrue()
         {
+     
+            var usuarioMock = new Mock<IUsuario>();
+            usuarioMock.Setup(u => u.Email).Returns("ejemplo@sacco.com");
 
-            var usuario = new Usuario
-            {
-                Nombre = "Ejemplo",
-                Email = "ejemplo@dominio.com"
-            };
-
-
-            var resultado = usuario.ValidarEmail();
-
+            var resultado = usuarioMock.Object.ValidarEmail();
 
             Assert.IsTrue(resultado);
         }
@@ -31,53 +22,42 @@ namespace TestUsuario
         [TestMethod]
         public void ValidarEmail_EmailInvalido_RetornaFalse()
         {
+        
+            var usuarioMock = new Mock<IUsuario>();
+            usuarioMock.Setup(u => u.Email).Returns("ejemplosacco.com");
 
-            var usuario = new Usuario
-            {
-                Nombre = "Ejemplo",
-                Email = "ejemplodominio.com"
-            };
+            var resultado = usuarioMock.Object.ValidarEmail();
 
-
-            var resultado = usuario.ValidarEmail();
-
-
+           
             Assert.IsFalse(resultado);
         }
 
         [TestMethod]
         public void ValidarEmail_EmailVacio_RetornaFalse()
         {
+  
+            var usuarioMock = new Mock<IUsuario>();
+            usuarioMock.Setup(u => u.Email).Returns(string.Empty);
 
-            var usuario = new Usuario
-            {
-                Nombre = "Ejemplo",
-                Email = ""
-            };
+     
+            var resultado = usuarioMock.Object.ValidarEmail();
 
-
-            var resultado = usuario.ValidarEmail();
-
-
+         
             Assert.IsFalse(resultado);
         }
 
         [TestMethod]
         public void ValidarEmail_EmailNulo_RetornaFalse()
         {
+ 
+            var usuarioMock = new Mock<IUsuario>();
+            usuarioMock.Setup(u => u.Email).Returns((string)null);
 
-            var usuario = new Usuario
-            {
-                Nombre = "Ejemplo",
-                Email = ""
-            };
-
-
-            var resultado = usuario.ValidarEmail();
+     
+            var resultado = usuarioMock.Object.ValidarEmail();
 
 
             Assert.IsFalse(resultado);
-
         }
     }
 }
